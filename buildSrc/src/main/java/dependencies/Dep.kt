@@ -78,12 +78,26 @@ object Dep {
             val version = "2.3.0-beta02"
             val runtimeKtx = "androidx.work:work-runtime-ktx:$version"
         }
+
+        object Compose {
+            val version = "0.1.0-dev03"
+
+            val runtime = "androidx.compose:compose-runtime:$version"
+            val core = "androidx.ui:ui-core:$version"
+            val layout = "androidx.ui:ui-layout:$version"
+            val framework = "androidx.ui:ui-framework:$version"
+            val material = "androidx.ui:ui-material:$version"
+            val foundation = "androidx.ui:ui-foundation:$version"
+            val text = "androidx.ui:ui-text:$version"
+            val tooling = "androidx.ui:ui-tooling:$version"
+        }
     }
 
     object Kotlin {
         val version = "1.3.61"
         val stdlibCommon = "org.jetbrains.kotlin:kotlin-stdlib-common:$version"
         val stdlibJvm = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$version"
+        val reflect = "org.jetbrains.kotlin:kotlin-reflect:$version"
         val coroutinesVersion = "1.3.3"
         val coroutinesCommon =
             "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$coroutinesVersion"
