@@ -14,17 +14,26 @@ import androidx.ui.layout.HeightSpacer
 import androidx.ui.layout.Padding
 import androidx.ui.layout.Row
 import androidx.ui.material.MaterialTheme
+import androidx.ui.material.TopAppBar
 import androidx.ui.material.ripple.Ripple
 import androidx.ui.material.withOpacity
 import io.github.droidkaigi.confsched2020.model.MockModel
 import io.github.droidkaigi.confsched2020.model.Session
 
 @Composable
-fun SessionsScreen() {
+fun SessionsScreen(openDrawer: () -> Unit) {
     AppBarLayout(
         appBar = {
             Toolbar(
-                title = "DroidKaigi"
+                title = "DroidKaigi",
+                navigationIcon = {
+                    VectorImageButton(
+                        id = R.drawable.ic_menu_black_24dp,
+                        tint = (+MaterialTheme.colors()).onPrimary
+                    ) {
+                        openDrawer()
+                    }
+                }
             )
         },
         content = {

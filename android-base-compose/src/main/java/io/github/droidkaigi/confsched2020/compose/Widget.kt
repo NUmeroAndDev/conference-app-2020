@@ -6,15 +6,24 @@ import androidx.compose.unaryPlus
 import androidx.ui.core.Modifier
 import androidx.ui.core.Text
 import androidx.ui.core.WithDensity
+import androidx.ui.core.dp
 import androidx.ui.foundation.Clickable
+import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
 import androidx.ui.graphics.vector.DrawVector
 import androidx.ui.layout.Container
 import androidx.ui.layout.FlexColumn
+import androidx.ui.layout.Gravity
+import androidx.ui.layout.Row
 import androidx.ui.layout.Size
+import androidx.ui.layout.Spacing
+import androidx.ui.layout.WidthSpacer
+import androidx.ui.material.Button
 import androidx.ui.material.MaterialTheme
+import androidx.ui.material.TextButtonStyle
 import androidx.ui.material.TopAppBar
 import androidx.ui.material.ripple.Ripple
+import androidx.ui.material.surface.Surface
 import androidx.ui.res.vectorResource
 
 @Composable
@@ -49,6 +58,26 @@ fun Toolbar(
         title = {
             if (title != null) {
                 Text(title)
+            }
+        },
+        navigationIcon = navigationIcon
+    )
+}
+
+// With action toolbar
+@Composable
+fun Toolbar(
+    title: String? = null,
+    navigationIcon: @Composable() (() -> Unit)? = null
+) {
+    val typography = +MaterialTheme.typography()
+    TopAppBar(
+        title = {
+            if (title != null) {
+                Text(
+                    text = title,
+                    style = typography.h6
+                )
             }
         },
         navigationIcon = navigationIcon
