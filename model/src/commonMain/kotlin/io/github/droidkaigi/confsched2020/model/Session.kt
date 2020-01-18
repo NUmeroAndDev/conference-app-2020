@@ -114,3 +114,160 @@ data class ServiceSession(
         }
     }
 }
+
+object MockModel {
+    fun createMockSessionList(): List<Session> {
+        return listOf(
+            ServiceSession(
+                id = SessionId(id = "id"),
+                dayNumber = 1,
+                startTime = DateTime.invoke(
+                    year = 2020,
+                    month = 1,
+                    day = 1,
+                    hour = 1,
+                    minute = 0
+                ),
+                endTime = DateTime.invoke(
+                    year = 2020,
+                    month = 1,
+                    day = 1,
+                    hour = 1,
+                    minute = 0
+                ),
+                title = LocaledString(ja = "Title", en = "Title"),
+                desc = "desc",
+                room = Room(
+                    id = 0,
+                    name = LocaledString(
+                        ja = "Room",
+                        en = "Room"
+                    ),
+                    sort = 1
+                ),
+                sessionType = SessionType.WELCOME_TALK,
+                isFavorited = false
+            ),
+            ServiceSession(
+                id = SessionId(id = "id"),
+                dayNumber = 1,
+                startTime = DateTime.invoke(
+                    year = 2020,
+                    month = 1,
+                    day = 1,
+                    hour = 1,
+                    minute = 0
+                ),
+                endTime = DateTime.invoke(
+                    year = 2020,
+                    month = 1,
+                    day = 1,
+                    hour = 1,
+                    minute = 0
+                ),
+                title = LocaledString(ja = "Title", en = "Title"),
+                desc = "desc",
+                room = Room(
+                    id = 0,
+                    name = LocaledString(
+                        ja = "Room",
+                        en = "Room"
+                    ),
+                    sort = 1
+                ),
+                sessionType = SessionType.WELCOME_TALK,
+                isFavorited = false
+            ),
+            ServiceSession(
+                id = SessionId(id = "id"),
+                dayNumber = 1,
+                startTime = DateTime.invoke(
+                    year = 2020,
+                    month = 1,
+                    day = 1,
+                    hour = 1,
+                    minute = 0
+                ),
+                endTime = DateTime.invoke(
+                    year = 2020,
+                    month = 1,
+                    day = 1,
+                    hour = 1,
+                    minute = 0
+                ),
+                title = LocaledString(ja = "Title", en = "Title"),
+                desc = "desc",
+                room = Room(
+                    id = 0,
+                    name = LocaledString(
+                        ja = "Room",
+                        en = "Room"
+                    ),
+                    sort = 1
+                ),
+                sessionType = SessionType.WELCOME_TALK,
+                isFavorited = false
+            ),
+            ServiceSession(
+                id = SessionId(id = "id"),
+                dayNumber = 1,
+                startTime = DateTime.invoke(
+                    year = 2020,
+                    month = 1,
+                    day = 1,
+                    hour = 1,
+                    minute = 0
+                ),
+                endTime = DateTime.invoke(
+                    year = 2020,
+                    month = 1,
+                    day = 1,
+                    hour = 1,
+                    minute = 0
+                ),
+                title = LocaledString(ja = "Title", en = "Title"),
+                desc = "desc",
+                room = Room(
+                    id = 0,
+                    name = LocaledString(
+                        ja = "Room",
+                        en = "Room"
+                    ),
+                    sort = 1
+                ),
+                sessionType = SessionType.WELCOME_TALK,
+                isFavorited = false
+            ),
+            ServiceSession(
+                id = SessionId(id = "id"),
+                dayNumber = 1,
+                startTime = DateTime.invoke(
+                    year = 2020,
+                    month = 1,
+                    day = 1,
+                    hour = 1,
+                    minute = 0
+                ),
+                endTime = DateTime.invoke(
+                    year = 2020,
+                    month = 1,
+                    day = 1,
+                    hour = 1,
+                    minute = 0
+                ),
+                title = LocaledString(ja = "Title", en = "Title"),
+                desc = "desc",
+                room = Room(
+                    id = 0,
+                    name = LocaledString(
+                        ja = "Room",
+                        en = "Room"
+                    ),
+                    sort = 1
+                ),
+                sessionType = SessionType.WELCOME_TALK,
+                isFavorited = false
+            )
+        )
+    }
+}
