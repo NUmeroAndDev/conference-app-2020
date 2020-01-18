@@ -4,10 +4,10 @@ import androidx.ui.graphics.Color
 import androidx.ui.material.ColorPalette
 
 val lightThemeColor = ColorPalette(
-    primary = Color("#6200EE"),
-    primaryVariant = Color("#3700B3"),
-    secondary = Color("#03DAD6"),
-    secondaryVariant = Color("#018786"),
+    primary = Color("#041e42"),
+    primaryVariant = Color("#041e42"),
+    secondary = Color("#00b5e2"),
+    secondaryVariant = Color("#00b5e2"),
     background = Color("#FFFFFF"),
     surface = Color("#FFFFFF"),
     error = Color("#B00020"),
@@ -19,10 +19,10 @@ val lightThemeColor = ColorPalette(
 )
 
 val darkThemeColor = ColorPalette(
-    primary = Color("#BB86FC"),
-    primaryVariant = Color("#3700B3"),
-    secondary = Color("#03DAD6"),
-    secondaryVariant = Color("#03DAD6"),
+    primary = Color("#8f9fb8"),
+    primaryVariant = Color("#8f9fb8"),
+    secondary = Color("#00b5e2"),
+    secondaryVariant = Color("#00b5e2"),
     background = Color("#121212"),
     surface = Color("#121212"),
     error = Color("#CF6679"),
