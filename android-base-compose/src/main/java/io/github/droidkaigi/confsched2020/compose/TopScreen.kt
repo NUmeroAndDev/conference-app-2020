@@ -2,31 +2,22 @@ package io.github.droidkaigi.confsched2020.compose
 
 import androidx.annotation.DrawableRes
 import androidx.compose.Composable
-import androidx.compose.ambient
 import androidx.compose.state
 import androidx.compose.unaryPlus
 import androidx.ui.core.Alignment
-import androidx.ui.core.ContextAmbient
 import androidx.ui.core.Modifier
 import androidx.ui.core.Text
 import androidx.ui.core.dp
-import androidx.ui.foundation.DrawImage
 import androidx.ui.foundation.SimpleImage
 import androidx.ui.foundation.shape.RectangleShape
-import androidx.ui.graphics.Image
-import androidx.ui.graphics.imageFromResource
 import androidx.ui.layout.Column
 import androidx.ui.layout.Container
-import androidx.ui.layout.DpConstraints
 import androidx.ui.layout.EdgeInsets
 import androidx.ui.layout.Expanded
 import androidx.ui.layout.ExpandedWidth
 import androidx.ui.layout.Gravity
-import androidx.ui.layout.HeightSpacer
 import androidx.ui.layout.MinHeight
-import androidx.ui.layout.Padding
 import androidx.ui.layout.Row
-import androidx.ui.layout.Size
 import androidx.ui.layout.WidthSpacer
 import androidx.ui.material.Button
 import androidx.ui.material.Divider
@@ -37,7 +28,6 @@ import androidx.ui.material.TextButtonStyle
 import androidx.ui.material.surface.Surface
 import androidx.ui.res.imageResource
 import androidx.ui.res.stringResource
-import androidx.ui.text.font.FontWeight
 
 @Composable
 fun TopScreen() {
