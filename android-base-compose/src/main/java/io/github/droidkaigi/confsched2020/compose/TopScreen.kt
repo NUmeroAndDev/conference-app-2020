@@ -28,6 +28,8 @@ import androidx.ui.material.TextButtonStyle
 import androidx.ui.material.surface.Surface
 import androidx.ui.res.imageResource
 import androidx.ui.res.stringResource
+import io.github.droidkaigi.confsched2020.compose.status.DrawerItem
+import io.github.droidkaigi.confsched2020.compose.status.DrawerStatus
 
 @Composable
 fun TopScreen() {
@@ -56,70 +58,41 @@ fun TopScreen() {
 
 @Composable
 fun TopDrawerContent(
-    closeDrawer: () -> Unit
+    closeDrawerAndNavigate: (DrawerItem) -> Unit
 ) {
     Column(modifier = Expanded) {
-
         TopDrawerHeader()
-
         DrawerDivider()
-
-        DrawerButton(
-            modifier = ExpandedWidth,
-            icon = R.drawable.ic_event_outline_black_24dp,
-            label = +stringResource(R.string.session_label),
-            isSelected = true
-        ) {
-            closeDrawer()
-        }
-
+        DrawerItem(
+            item = DrawerItem.Session,
+            action = closeDrawerAndNavigate
+        )
         DrawerDivider()
-
-        DrawerButton(
-            icon = R.drawable.ic_android_black_24dp,
-            label = +stringResource(R.string.about_label),
-            isSelected = false
-        ) {
-            closeDrawer()
-        }
-        DrawerButton(
-            icon = R.drawable.ic_info_outline_black_24dp,
-            label = +stringResource(R.string.announce_label),
-            isSelected = false
-        ) {
-            closeDrawer()
-        }
-        DrawerButton(
-            icon = R.drawable.ic_place_black_24dp,
-            label = +stringResource(R.string.map_label),
-            isSelected = false
-        ) {
-            closeDrawer()
-        }
-
+        DrawerItem(
+            item = DrawerItem.About,
+            action = closeDrawerAndNavigate
+        )
+        DrawerItem(
+            item = DrawerItem.Announce,
+            action = closeDrawerAndNavigate
+        )
+        DrawerItem(
+            item = DrawerItem.Map,
+            action = closeDrawerAndNavigate
+        )
         DrawerDivider()
-
-        DrawerButton(
-            icon = R.drawable.ic_business_black_24dp,
-            label = +stringResource(R.string.sponsor_label),
-            isSelected = false
-        ) {
-            closeDrawer()
-        }
-        DrawerButton(
-            icon = R.drawable.ic_people_outline_black_24dp,
-            label = +stringResource(R.string.contributor_label),
-            isSelected = false
-        ) {
-            closeDrawer()
-        }
-        DrawerButton(
-            icon = R.drawable.ic_settings_black_24dp,
-            label = +stringResource(R.string.setting_label),
-            isSelected = false
-        ) {
-            closeDrawer()
-        }
+        DrawerItem(
+            item = DrawerItem.Sponsor,
+            action = closeDrawerAndNavigate
+        )
+        DrawerItem(
+            item = DrawerItem.Contributor,
+            action = closeDrawerAndNavigate
+        )
+        DrawerItem(
+            item = DrawerItem.Settings,
+            action = closeDrawerAndNavigate
+        )
     }
 }
 
@@ -142,6 +115,23 @@ fun TopDrawerHeader() {
 fun TopContent(openDrawer: () -> Unit) {
     Surface(color = (+MaterialTheme.colors()).background) {
         SessionsScreen(openDrawer)
+    }
+}
+
+@Composable
+fun DrawerItem(
+    item: DrawerItem,
+    action: (DrawerItem) -> Unit
+) {
+    val isSelected = DrawerStatus.selectedDrawerItem == item
+    DrawerButton(
+        icon = item.icon,
+        label = +stringResource(item.label),
+        isSelected = isSelected
+    ) {
+        if (isSelected) return@DrawerButton
+        DrawerStatus.selectedDrawerItem = item
+        action(item)
     }
 }
 
