@@ -1,0 +1,104 @@
+package io.github.droidkaigi.confsched2020.compose
+
+import androidx.compose.Composable
+import androidx.compose.unaryPlus
+import androidx.ui.core.Alignment
+import androidx.ui.core.Text
+import androidx.ui.core.dp
+import androidx.ui.foundation.Clickable
+import androidx.ui.foundation.VerticalScroller
+import androidx.ui.layout.Column
+import androidx.ui.layout.Container
+import androidx.ui.layout.HeightSpacer
+import androidx.ui.layout.Padding
+import androidx.ui.layout.Row
+import androidx.ui.material.MaterialTheme
+import androidx.ui.material.ripple.Ripple
+import androidx.ui.material.withOpacity
+import io.github.droidkaigi.confsched2020.model.MockModel
+import io.github.droidkaigi.confsched2020.model.Session
+
+@Composable
+fun SessionsScreen() {
+    AppBarLayout(
+        appBar = {
+            Toolbar(
+                title = "DroidKaigi"
+            )
+        },
+        content = {
+            SessionList(MockModel.createMockSessionList())
+        }
+    )
+}
+
+@Composable
+fun SessionList(sessionList: List<Session>) {
+    VerticalScroller {
+        Column {
+            sessionList.forEach {
+                SessionItem(it)
+            }
+        }
+    }
+}
+
+@Composable
+fun SessionItem(
+    session: Session,
+    onClick: (() -> Unit)? = null
+) {
+    Ripple(bounded = true) {
+        Clickable(onClick = onClick) {
+            SessionItemContent(session)
+        }
+    }
+}
+
+@Composable
+fun SessionItemContent(
+    session: Session
+) {
+    Row {
+        val materialColor = +MaterialTheme.colors()
+        val typography = +MaterialTheme.typography()
+        Container(
+            alignment = Alignment.TopCenter,
+            width = 72.dp,
+            children = {
+                Padding(top = 16.dp) {
+                    Text(
+                        text = session.startTimeText,
+                        style = typography.subtitle1.withOpacity(0.38F)
+                    )
+                }
+            }
+        )
+        Column(modifier = Flexible(1f)) {
+            Padding(padding = 16.dp) {
+                Column {
+                    Text(
+                        text = session.room.name.ja,
+                        style = typography.caption.withOpacity(0.38F)
+                    )
+                    HeightSpacer(height = 8.dp)
+                    Text(
+                        text = session.title.ja,
+                        style = typography.h6.copy(
+                            color = materialColor.primary
+                        )
+                    )
+                }
+            }
+        }
+        Padding(padding = 16.dp) {
+            VectorImageButton(
+                id = R.drawable.ic_bookmark_border_black_24dp,
+                tint = materialColor.secondary,
+                onClick = {
+                    // TODO Toggle favorite
+                }
+            )
+        }
+    }
+}

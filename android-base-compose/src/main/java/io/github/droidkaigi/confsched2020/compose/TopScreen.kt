@@ -11,7 +11,7 @@ import androidx.ui.text.TextStyle
 fun TopScreen() {
     AppTheme {
         Surface(color = (+MaterialTheme.colors()).background) {
-            HelloWorldScreen()
+            SessionsScreen()
         }
     }
 }
