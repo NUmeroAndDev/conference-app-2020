@@ -7,6 +7,7 @@ import androidx.ui.core.Text
 import androidx.ui.core.dp
 import androidx.ui.foundation.Clickable
 import androidx.ui.foundation.VerticalScroller
+import androidx.ui.foundation.isSystemInDarkTheme
 import androidx.ui.layout.Column
 import androidx.ui.layout.Container
 import androidx.ui.layout.HeightSpacer
@@ -82,12 +83,7 @@ fun SessionItemContent(
                         style = typography.caption.withOpacity(0.38F)
                     )
                     HeightSpacer(height = 8.dp)
-                    Text(
-                        text = session.title.ja,
-                        style = typography.h6.copy(
-                            color = materialColor.primary
-                        )
-                    )
+                    SessionTitleText(title = session.title.ja)
                 }
             }
         }
@@ -101,4 +97,21 @@ fun SessionItemContent(
             )
         }
     }
+}
+
+@Composable
+fun SessionTitleText(title: String) {
+    val materialColor = +MaterialTheme.colors()
+    val typography = +MaterialTheme.typography()
+    val isDarkTheme = +isSystemInDarkTheme()
+    Text(
+        text = title,
+        style = typography.h6.copy(
+            color = if (isDarkTheme) {
+                materialColor.onSurface
+            } else {
+                materialColor.primary
+            }
+        )
+    )
 }
