@@ -41,5 +41,18 @@ enum class DrawerItem(
     Settings(
         R.drawable.ic_settings_black_24dp,
         R.string.setting_label
-    )
+    );
+
+    fun navigate() {
+        val destination = when(this) {
+            Session -> Screen.SessionList
+            About -> Screen.About
+            Announce -> Screen.Announce
+            Map -> Screen.Map
+            Sponsor -> Screen.Sponsor
+            Contributor -> Screen.Contributor
+            Settings -> Screen.Settings
+        }
+        navigateTo(destination = destination)
+    }
 }
