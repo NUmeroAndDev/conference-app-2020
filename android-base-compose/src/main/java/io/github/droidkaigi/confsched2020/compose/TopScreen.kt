@@ -4,6 +4,7 @@ import androidx.annotation.DrawableRes
 import androidx.compose.Composable
 import androidx.compose.state
 import androidx.compose.unaryPlus
+import androidx.ui.animation.Crossfade
 import androidx.ui.core.Alignment
 import androidx.ui.core.Modifier
 import androidx.ui.core.Text
@@ -30,6 +31,8 @@ import androidx.ui.res.imageResource
 import androidx.ui.res.stringResource
 import io.github.droidkaigi.confsched2020.compose.status.DrawerItem
 import io.github.droidkaigi.confsched2020.compose.status.DrawerStatus
+import io.github.droidkaigi.confsched2020.compose.status.Screen
+import io.github.droidkaigi.confsched2020.compose.status.ScreenStatus
 
 @Composable
 fun TopScreen() {
@@ -44,6 +47,7 @@ fun TopScreen() {
             },
             drawerContent = {
                 TopDrawerContent {
+                    it.navigate()
                     state = DrawerState.Closed
                 }
             },
@@ -113,8 +117,20 @@ fun TopDrawerHeader() {
 
 @Composable
 fun TopContent(openDrawer: () -> Unit) {
-    Surface(color = (+MaterialTheme.colors()).background) {
-        SessionsScreen(openDrawer)
+    Crossfade(ScreenStatus.currentScreen) { screen ->
+        Surface(color = (+MaterialTheme.colors()).background) {
+            when (screen) {
+                is Screen.SessionList -> SessionsScreen(openDrawer)
+                is Screen.SessionDetail -> EmptyScreen(openDrawer)
+                is Screen.Speaker -> EmptyScreen(openDrawer)
+                is Screen.About -> EmptyScreen(openDrawer)
+                is Screen.Announce -> EmptyScreen(openDrawer)
+                is Screen.Map -> EmptyScreen(openDrawer)
+                is Screen.Sponsor -> EmptyScreen(openDrawer)
+                is Screen.Contributor -> EmptyScreen(openDrawer)
+                is Screen.Settings -> EmptyScreen(openDrawer)
+            }
+        }
     }
 }
 
