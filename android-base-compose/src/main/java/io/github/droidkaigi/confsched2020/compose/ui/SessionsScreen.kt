@@ -1,4 +1,4 @@
-package io.github.droidkaigi.confsched2020.compose
+package io.github.droidkaigi.confsched2020.compose.ui
 
 import androidx.compose.Composable
 import androidx.compose.unaryPlus
@@ -14,9 +14,12 @@ import androidx.ui.layout.HeightSpacer
 import androidx.ui.layout.Padding
 import androidx.ui.layout.Row
 import androidx.ui.material.MaterialTheme
-import androidx.ui.material.TopAppBar
 import androidx.ui.material.ripple.Ripple
 import androidx.ui.material.withOpacity
+import io.github.droidkaigi.confsched2020.compose.AppBarLayout
+import io.github.droidkaigi.confsched2020.compose.R
+import io.github.droidkaigi.confsched2020.compose.Toolbar
+import io.github.droidkaigi.confsched2020.compose.VectorImageButton
 import io.github.droidkaigi.confsched2020.model.MockModel
 import io.github.droidkaigi.confsched2020.model.Session
 
@@ -60,7 +63,9 @@ fun SessionItem(
 ) {
     Ripple(bounded = true) {
         Clickable(onClick = onClick) {
-            SessionItemContent(session)
+            SessionItemContent(
+                session
+            )
         }
     }
 }
@@ -92,7 +97,9 @@ fun SessionItemContent(
                         style = typography.caption.withOpacity(0.38F)
                     )
                     HeightSpacer(height = 8.dp)
-                    SessionTitleText(title = session.title.ja)
+                    SessionTitleText(
+                        title = session.title.ja
+                    )
                 }
             }
         }

@@ -1,4 +1,4 @@
-package io.github.droidkaigi.confsched2020.compose
+package io.github.droidkaigi.confsched2020.compose.ui
 
 import androidx.annotation.DrawableRes
 import androidx.compose.Composable
@@ -29,6 +29,9 @@ import androidx.ui.material.TextButtonStyle
 import androidx.ui.material.surface.Surface
 import androidx.ui.res.imageResource
 import androidx.ui.res.stringResource
+import io.github.droidkaigi.confsched2020.compose.AppTheme
+import io.github.droidkaigi.confsched2020.compose.R
+import io.github.droidkaigi.confsched2020.compose.VectorImage
 import io.github.droidkaigi.confsched2020.compose.status.DrawerItem
 import io.github.droidkaigi.confsched2020.compose.status.DrawerStatus
 import io.github.droidkaigi.confsched2020.compose.status.Screen
@@ -120,15 +123,33 @@ fun TopContent(openDrawer: () -> Unit) {
     Crossfade(ScreenStatus.currentScreen) { screen ->
         Surface(color = (+MaterialTheme.colors()).background) {
             when (screen) {
-                is Screen.SessionList -> SessionsScreen(openDrawer)
-                is Screen.SessionDetail -> EmptyScreen(openDrawer)
-                is Screen.Speaker -> EmptyScreen(openDrawer)
-                is Screen.About -> EmptyScreen(openDrawer)
-                is Screen.Announce -> EmptyScreen(openDrawer)
-                is Screen.Map -> EmptyScreen(openDrawer)
-                is Screen.Sponsor -> EmptyScreen(openDrawer)
-                is Screen.Contributor -> EmptyScreen(openDrawer)
-                is Screen.Settings -> EmptyScreen(openDrawer)
+                is Screen.SessionList -> SessionsScreen(
+                    openDrawer
+                )
+                is Screen.SessionDetail -> EmptyScreen(
+                    openDrawer
+                )
+                is Screen.Speaker -> EmptyScreen(
+                    openDrawer
+                )
+                is Screen.About -> EmptyScreen(
+                    openDrawer
+                )
+                is Screen.Announce -> EmptyScreen(
+                    openDrawer
+                )
+                is Screen.Map -> EmptyScreen(
+                    openDrawer
+                )
+                is Screen.Sponsor -> EmptyScreen(
+                    openDrawer
+                )
+                is Screen.Contributor -> EmptyScreen(
+                    openDrawer
+                )
+                is Screen.Settings -> EmptyScreen(
+                    openDrawer
+                )
             }
         }
     }
