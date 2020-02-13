@@ -19,7 +19,7 @@ fun EmptyScreen(openDrawer: () -> Unit) {
                 navigationIcon = {
                     VectorImageButton(
                         id = R.drawable.ic_menu_black_24dp,
-                        tint = (+MaterialTheme.colors()).onPrimary
+                        tint = MaterialTheme.colors().onPrimary
                     ) {
                         openDrawer()
                     }

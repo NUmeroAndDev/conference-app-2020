@@ -7,9 +7,9 @@ import androidx.ui.material.MaterialTheme
 
 @Composable
 fun AppTheme(
-    children: () -> Unit
+    children: @Composable() () -> Unit
 ) {
-    val isDarkTheme = +isSystemInDarkTheme()
+    val isDarkTheme = isSystemInDarkTheme()
     MaterialTheme(
         colors = if (isDarkTheme) darkThemeColor else lightThemeColor
     ) {

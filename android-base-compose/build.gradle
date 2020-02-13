@@ -70,6 +70,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    composeOptions {
+        kotlinCompilerExtensionVersion "0.1.0-dev04"
+    }
 }
 
 dependencies {

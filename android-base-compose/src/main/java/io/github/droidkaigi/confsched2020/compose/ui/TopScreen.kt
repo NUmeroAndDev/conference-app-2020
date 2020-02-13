@@ -3,23 +3,20 @@ package io.github.droidkaigi.confsched2020.compose.ui
 import androidx.annotation.DrawableRes
 import androidx.compose.Composable
 import androidx.compose.state
-import androidx.compose.unaryPlus
 import androidx.ui.animation.Crossfade
 import androidx.ui.core.Alignment
 import androidx.ui.core.Modifier
 import androidx.ui.core.Text
-import androidx.ui.core.dp
 import androidx.ui.foundation.SimpleImage
 import androidx.ui.foundation.shape.RectangleShape
 import androidx.ui.layout.Column
 import androidx.ui.layout.Container
 import androidx.ui.layout.EdgeInsets
-import androidx.ui.layout.Expanded
-import androidx.ui.layout.ExpandedWidth
-import androidx.ui.layout.Gravity
-import androidx.ui.layout.MinHeight
+import androidx.ui.layout.LayoutGravity
+import androidx.ui.layout.LayoutHeight
+import androidx.ui.layout.LayoutWidth
 import androidx.ui.layout.Row
-import androidx.ui.layout.WidthSpacer
+import androidx.ui.layout.Spacer
 import androidx.ui.material.Button
 import androidx.ui.material.Divider
 import androidx.ui.material.DrawerState
@@ -29,6 +26,7 @@ import androidx.ui.material.TextButtonStyle
 import androidx.ui.material.surface.Surface
 import androidx.ui.res.imageResource
 import androidx.ui.res.stringResource
+import androidx.ui.unit.dp
 import io.github.droidkaigi.confsched2020.compose.AppTheme
 import io.github.droidkaigi.confsched2020.compose.R
 import io.github.droidkaigi.confsched2020.compose.VectorImage
@@ -39,7 +37,7 @@ import io.github.droidkaigi.confsched2020.compose.status.ScreenStatus
 
 @Composable
 fun TopScreen() {
-    var state by +state { DrawerState.Closed }
+    var state by state { DrawerState.Closed }
     AppTheme {
         ModalDrawerLayout(
             drawerState = state,
@@ -67,7 +65,7 @@ fun TopScreen() {
 fun TopDrawerContent(
     closeDrawerAndNavigate: (DrawerItem) -> Unit
 ) {
-    Column(modifier = Expanded) {
+    Column(modifier = LayoutWidth.Fill + LayoutHeight.Fill) {
         TopDrawerHeader()
         DrawerDivider()
         DrawerItem(
@@ -107,13 +105,13 @@ fun TopDrawerContent(
 fun TopDrawerHeader() {
     // FIXME not same design spec
     Container(
-        modifier = ExpandedWidth,
+        modifier = LayoutWidth.Fill,
         padding = EdgeInsets(
             top = 24.dp,
             bottom = 24.dp
         )
     ) {
-        val image = +imageResource(R.drawable.logo)
+        val image = imageResource(R.drawable.logo)
         SimpleImage(image = image)
     }
 }
@@ -121,7 +119,7 @@ fun TopDrawerHeader() {
 @Composable
 fun TopContent(openDrawer: () -> Unit) {
     Crossfade(ScreenStatus.currentScreen) { screen ->
-        Surface(color = (+MaterialTheme.colors()).background) {
+        Surface(color = MaterialTheme.colors().background) {
             when (screen) {
                 is Screen.SessionList -> SessionsScreen(
                     openDrawer
@@ -163,7 +161,7 @@ fun DrawerItem(
     val isSelected = DrawerStatus.selectedDrawerItem == item
     DrawerButton(
         icon = item.icon,
-        label = +stringResource(item.label),
+        label = stringResource(item.label),
         isSelected = isSelected
     ) {
         if (isSelected) return@DrawerButton
@@ -174,25 +172,24 @@ fun DrawerItem(
 
 @Composable
 private fun DrawerButton(
-    modifier: Modifier = ExpandedWidth,
+    modifier: Modifier = LayoutWidth.Fill,
     @DrawableRes icon: Int,
     label: String,
     isSelected: Boolean,
     action: () -> Unit
 ) {
-    val colors = +MaterialTheme.colors()
+    val colors = MaterialTheme.colors()
     val textIconColor = if (isSelected) {
         colors.primary
     } else {
         colors.onSurface.copy(alpha = 0.38f)
     }
-    val typography = +MaterialTheme.typography()
+    val typography = MaterialTheme.typography()
     Button(
         modifier = modifier,
         onClick = action,
         style = TextButtonStyle().copy(
-            shape = RectangleShape,
-            rippleColor = colors.onSurface
+            shape = RectangleShape
         )
     ) {
         Container(
@@ -200,16 +197,16 @@ private fun DrawerButton(
             alignment = Alignment.CenterLeft
         ) {
             Row(
-                modifier = MinHeight(48.dp) wraps ExpandedWidth
+                modifier = LayoutHeight.Min(48.dp) + LayoutWidth.Fill
             ) {
                 VectorImage(
-                    modifier = Gravity.Center,
+                    modifier = LayoutGravity.Center,
                     id = icon,
                     tint = textIconColor
                 )
-                WidthSpacer(16.dp)
+                Spacer(modifier = LayoutWidth(16.dp))
                 Text(
-                    modifier = Gravity.Center,
+                    modifier = LayoutGravity.Center,
                     text = label,
                     style = typography.subtitle2.copy(
                         color = textIconColor
@@ -222,7 +219,7 @@ private fun DrawerButton(
 
 @Composable
 fun DrawerDivider() {
-    val materialColor = +MaterialTheme.colors()
+    val materialColor = MaterialTheme.colors()
     Divider(
         color = materialColor.onSurface.copy(
             alpha = 0.12F

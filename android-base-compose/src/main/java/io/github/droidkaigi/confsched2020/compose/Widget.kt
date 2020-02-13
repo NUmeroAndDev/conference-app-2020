@@ -2,28 +2,18 @@ package io.github.droidkaigi.confsched2020.compose
 
 import androidx.annotation.DrawableRes
 import androidx.compose.Composable
-import androidx.compose.unaryPlus
 import androidx.ui.core.Modifier
 import androidx.ui.core.Text
 import androidx.ui.core.WithDensity
-import androidx.ui.core.dp
 import androidx.ui.foundation.Clickable
-import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
 import androidx.ui.graphics.vector.DrawVector
 import androidx.ui.layout.Container
-import androidx.ui.layout.FlexColumn
-import androidx.ui.layout.Gravity
-import androidx.ui.layout.Row
-import androidx.ui.layout.Size
-import androidx.ui.layout.Spacing
-import androidx.ui.layout.WidthSpacer
-import androidx.ui.material.Button
+import androidx.ui.layout.LayoutSize
 import androidx.ui.material.MaterialTheme
-import androidx.ui.material.TextButtonStyle
+import androidx.ui.material.Scaffold
 import androidx.ui.material.TopAppBar
 import androidx.ui.material.ripple.Ripple
-import androidx.ui.material.surface.Surface
 import androidx.ui.res.vectorResource
 
 @Composable
@@ -31,10 +21,14 @@ fun AppBarLayout(
     appBar: @Composable() () -> Unit,
     content: @Composable() () -> Unit
 ) {
-    FlexColumn {
-        inflexible { appBar() }
-        expanded(1.0f) { content() }
-    }
+    Scaffold(
+        topAppBar = {
+            appBar()
+        },
+        bodyContent = {
+            content()
+        }
+    )
 }
 
 // Without action toolbar
@@ -48,7 +42,7 @@ fun Toolbar(
         {
             VectorImageButton(
                 id = R.drawable.ic_arrow_back_black_24dp,
-                tint = (+MaterialTheme.colors()).onPrimary
+                tint = MaterialTheme.colors().onPrimary
             ) {
                 onBackPressed?.invoke()
             }
@@ -70,7 +64,7 @@ fun Toolbar(
     title: String? = null,
     navigationIcon: @Composable() (() -> Unit)? = null
 ) {
-    val typography = +MaterialTheme.typography()
+    val typography = MaterialTheme.typography()
     TopAppBar(
         title = {
             if (title != null) {
@@ -102,10 +96,10 @@ fun VectorImageButton(
 
 @Composable
 fun VectorImage(modifier: Modifier = Modifier.None, @DrawableRes id: Int, tint: Color) {
-    val vector = +vectorResource(id)
+    val vector = vectorResource(id)
     WithDensity {
         Container(
-            modifier = modifier wraps Size(vector.defaultWidth.toDp(), vector.defaultHeight.toDp())
+            modifier = modifier + LayoutSize(vector.defaultWidth, vector.defaultHeight)
         ) {
             DrawVector(vector, tint)
         }
