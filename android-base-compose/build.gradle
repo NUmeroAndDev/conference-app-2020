@@ -15,7 +15,7 @@ android {
         versionCode Versions.androidVersionCode
         versionName Versions.androidVersionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        applicationIdSuffix ".compose"
+
     }
     signingConfigs {
         debug {
@@ -91,7 +91,6 @@ dependencies {
     implementation Dep.AndroidX.constraint
     implementation Dep.AndroidX.activityKtx
     implementation Dep.Firebase.firestoreKtx
-    implementation Dep.Firebase.crashlytics
 
     implementation Dep.AndroidX.Compose.runtime
     implementation Dep.AndroidX.Compose.core
@@ -110,4 +109,4 @@ dependencies {
     debugImplementation Dep.LeakCanary.leakCanary
 }
 
-//apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.gms.google-services'

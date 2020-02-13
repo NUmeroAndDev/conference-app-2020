@@ -1,7 +1,13 @@
 package io.github.droidkaigi.confsched2020.compose.ui
 
 import androidx.compose.Composable
+import androidx.compose.ambient
+import androidx.compose.remember
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.liveData
 import androidx.ui.core.Alignment
+import androidx.ui.core.ContextAmbient
 import androidx.ui.core.Text
 import androidx.ui.foundation.Clickable
 import androidx.ui.foundation.VerticalScroller
@@ -20,11 +26,56 @@ import io.github.droidkaigi.confsched2020.compose.AppBarLayout
 import io.github.droidkaigi.confsched2020.compose.R
 import io.github.droidkaigi.confsched2020.compose.Toolbar
 import io.github.droidkaigi.confsched2020.compose.VectorImageButton
-import io.github.droidkaigi.confsched2020.model.MockModel
+import io.github.droidkaigi.confsched2020.compose.observe
+import io.github.droidkaigi.confsched2020.data.api.ApiComponent
+import io.github.droidkaigi.confsched2020.data.db.DbComponent
+import io.github.droidkaigi.confsched2020.data.firestore.FirestoreComponent
+import io.github.droidkaigi.confsched2020.data.repository.DaggerRepositoryComponent
 import io.github.droidkaigi.confsched2020.model.Session
+import io.github.droidkaigi.confsched2020.model.SessionContents
+import io.github.droidkaigi.confsched2020.model.repository.SessionRepository
+import kotlinx.coroutines.Dispatchers
+import timber.log.Timber
+import timber.log.debug
+
+class ViewModel(sessionRepository: SessionRepository) {
+
+    val sessionsLoadStateLiveData: LiveData<SessionContents> = liveData {
+        emitSource(
+            sessionRepository.sessionContents()
+                .asLiveData()
+        )
+        try {
+            sessionRepository.refresh()
+        } catch (e: Exception) {
+            // We can show sessions with cache
+            Timber.debug(e) { "Fail sessionRepository.refresh()" }
+        }
+    }
+}
 
 @Composable
 fun SessionsScreen(openDrawer: () -> Unit) {
+    // FIXME 一時的なrepositoryの生成
+    val context = ambient(ContextAmbient)
+    val apiComponent = ApiComponent.factory().create(context)
+    val dbComponent = DbComponent.factory().create(context, Dispatchers.IO, "droidkaigi.db")
+    val repository = DaggerRepositoryComponent.factory().create(
+        context = context,
+        droidKaigiApi = apiComponent.DroidKaigiApi(),
+        googleFormApi = apiComponent.GoogleFormApi(),
+        sessionDatabase = dbComponent.sessionDatabase(),
+        sponsorDatabase = dbComponent.sponsorDatabase(),
+        announcementDatabase = dbComponent.announcementDatabase(),
+        staffDatabase = dbComponent.staffDatabase(),
+        contributorDatabase = dbComponent.contributorDatabase(),
+        firestore = FirestoreComponent.factory().create(Dispatchers.IO).firestore()
+    ).sessionRepository()
+
+    val vm = ViewModel(repository)
+    val liveData = remember { vm.sessionsLoadStateLiveData }
+    val sessionContents = observe(liveData)
+
     AppBarLayout(
         appBar = {
             Toolbar(
@@ -40,7 +91,7 @@ fun SessionsScreen(openDrawer: () -> Unit) {
             )
         },
         content = {
-            SessionList(MockModel.createMockSessionList())
+            SessionList(sessionContents?.sessions ?: emptyList())
         }
     )
 }
