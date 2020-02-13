@@ -9,9 +9,9 @@ import androidx.ui.foundation.Clickable
 import androidx.ui.graphics.Color
 import androidx.ui.graphics.vector.DrawVector
 import androidx.ui.layout.Container
-import androidx.ui.layout.FlexColumn
 import androidx.ui.layout.LayoutSize
 import androidx.ui.material.MaterialTheme
+import androidx.ui.material.Scaffold
 import androidx.ui.material.TopAppBar
 import androidx.ui.material.ripple.Ripple
 import androidx.ui.res.vectorResource
@@ -21,10 +21,14 @@ fun AppBarLayout(
     appBar: @Composable() () -> Unit,
     content: @Composable() () -> Unit
 ) {
-    FlexColumn {
-        inflexible { appBar() }
-        expanded(1.0f) { content() }
-    }
+    Scaffold(
+        topAppBar = {
+            appBar()
+        },
+        bodyContent = {
+            content()
+        }
+    )
 }
 
 // Without action toolbar
