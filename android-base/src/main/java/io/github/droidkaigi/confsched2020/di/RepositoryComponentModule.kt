@@ -16,42 +16,40 @@ import io.github.droidkaigi.confsched2020.model.repository.AnnouncementRepositor
 import io.github.droidkaigi.confsched2020.model.repository.ContributorRepository
 import io.github.droidkaigi.confsched2020.model.repository.SessionRepository
 import io.github.droidkaigi.confsched2020.model.repository.SponsorRepository
-import io.github.droidkaigi.confsched2020.model.repository.StaffRepository
 import javax.inject.Singleton
 
 @Module
 object RepositoryComponentModule {
-    @JvmStatic @Provides @Singleton fun provideRepository(
+    @Provides @Singleton
+    fun provideRepository(
         repositoryComponent: RepositoryComponent
     ): SessionRepository {
         return repositoryComponent.sessionRepository()
     }
 
-    @JvmStatic @Provides @Singleton fun provideSponsorRepository(
+    @Provides @Singleton
+    fun provideSponsorRepository(
         repositoryComponent: RepositoryComponent
     ): SponsorRepository {
         return repositoryComponent.sponsorRepository()
     }
 
-    @JvmStatic @Provides @Singleton fun provideAnnouncementRepository(
+    @Provides @Singleton
+    fun provideAnnouncementRepository(
         repositoryComponent: RepositoryComponent
     ): AnnouncementRepository {
         return repositoryComponent.announcementRepository()
     }
 
-    @JvmStatic @Provides @Singleton fun provideStaffRepository(
-        repositoryComponent: RepositoryComponent
-    ): StaffRepository {
-        return repositoryComponent.staffRepository()
-    }
-
-    @JvmStatic @Provides @Singleton fun provideContributorRepository(
+    @Provides @Singleton
+    fun provideContributorRepository(
         repositoryComponent: RepositoryComponent
     ): ContributorRepository {
         return repositoryComponent.contributorRepository()
     }
 
-    @JvmStatic @Provides @Singleton fun provideRepositoryComponent(
+    @Provides @Singleton
+    fun provideRepositoryComponent(
         context: Context,
         droidKaigiApi: DroidKaigiApi,
         googleFormApi: GoogleFormApi,
