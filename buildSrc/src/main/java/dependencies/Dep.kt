@@ -80,7 +80,7 @@ object Dep {
         }
 
         object Compose {
-            val version = "0.1.0-dev03"
+            val version = "0.1.0-dev04"
 
             val runtime = "androidx.compose:compose-runtime:$version"
             val core = "androidx.ui:ui-core:$version"

@@ -1,9 +1,10 @@
 package io.github.droidkaigi.confsched2020.compose
 
 import androidx.ui.graphics.Color
-import androidx.ui.material.ColorPalette
+import androidx.ui.material.darkColorPalette
+import androidx.ui.material.lightColorPalette
 
-val lightThemeColor = ColorPalette(
+val lightThemeColor = lightColorPalette(
     primary = Color("#041e42"),
     primaryVariant = Color("#041e42"),
     secondary = Color("#00b5e2"),
@@ -18,11 +19,10 @@ val lightThemeColor = ColorPalette(
     onError = Color("#FFFFFF")
 )
 
-val darkThemeColor = ColorPalette(
+val darkThemeColor = darkColorPalette(
     primary = Color("#8f9fb8"),
     primaryVariant = Color("#8f9fb8"),
     secondary = Color("#00b5e2"),
-    secondaryVariant = Color("#00b5e2"),
     background = Color("#121212"),
     surface = Color("#121212"),
     error = Color("#CF6679"),
